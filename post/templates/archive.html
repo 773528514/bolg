@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="archives-wrap">
+    {% regroup posts by created.year as year_group %}
+{% comment %}
+    posts: {{  posts }}<br> <QuerySet [<Post: Django实战之个人博客>, ...]>
+    created.year：{{ created.year }}<br>
+    year_group ：{{ year_group }}<br> [GroupedResult(grouper=2017, list=[<Post: Django实战之个人博客>, ...)]
+{% endcomment %}
+    {% for year in year_group %}
+        <div class="archive-year-wrap">
+          <span class="archive-year">{{ year.grouper }}</span>
+        </div>
+        <div class="archives">
+        {% for post in year.list %}
+             <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="#" class="archive-article-date">
+  <time>{{post.created.year }} {{ post.created.month }}</time>
+  <!-- 等同上面 <time>{{ posts.0.created.year }} {{  posts.0.created.month }}</time>  -->
+</a>
+    <h1 itemprop="name">
+      <a class="archive-article-title" target="_blank" href="/post/details/{{ post.id }}">{{ post.title }}</a>
+    </h1>
+    </header>
+  </div>
+</article>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+
+
+
+
+{#    <div class="archive-year-wrap">#}
+{#          <span class="archive-year">2017</span>#}
+{#        </div>#}
+{#        <div class="archives">#}
+{#    {% for post in posts %}#}
+{# <article class="archive-article archive-type-post">#}
+{#  <div class="archive-article-inner">#}
+{#    <header class="archive-article-header">#}
+{#      <a href="http://127.0.0.1:8000/archive/#" class="archive-article-date">#}
+{#  <time>12 04</time>#}
+{#</a>#}
+{#    <h1 itemprop="name">#}
+{#      <a class="archive-article-title" href="http://127.0.0.1:8000/archive/#">{{ post.title }}</a>#}
+{#    </h1>#}
+{#    </header>#}
+{#  </div>#}
+{#</article>#}
+{#    {% endfor %}#}
+{##}
+{#        </div>#}
+    </section>
+{% endblock main %}
