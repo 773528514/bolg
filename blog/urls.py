@@ -31,7 +31,7 @@ urlpatterns = [
                 url(r'', include('ckeditor_uploader.urls')),
 
                 #url(r'', include(routers.urls)),
-                url(r'api-auth', include('rest_framework.urls', namespace='rest_framework')),
+                #url(r'api-auth', include('rest_framework.urls', namespace='rest_framework')),
                 # （debug模式下）回显图片
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns = router.urls
+# urlpatterns = router.urls
